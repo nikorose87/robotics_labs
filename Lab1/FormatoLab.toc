@@ -1,0 +1,13 @@
+\babel@toc {spanish}{}
+\contentsline {section}{\numberline {1}Objectives}{1}{section.1}%
+\contentsline {section}{\numberline {2}Equipment and Materials}{1}{section.2}%
+\contentsline {section}{\numberline {3}General Considerations}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}About the Report}{2}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}About the laboratory}{2}{subsection.3.2}%
+\contentsline {section}{\numberline {4}ROSA basics}{2}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Creating a Workspace}{2}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Creating a ROS package.}{3}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Creating a node in Python}{3}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Robots in ROS}{4}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Visualizing in Rviz}{4}{subsection.5.1}%
+\contentsline {section}{\numberline {6}Questions}{6}{section.6}%

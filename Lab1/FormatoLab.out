@@ -1,0 +1,12 @@
+\BOOKMARK [1][-]{section.1}{Objectives}{}% 1
+\BOOKMARK [1][-]{section.2}{Equipment and Materials}{}% 2
+\BOOKMARK [1][-]{section.3}{General Considerations}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{About the Report}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{About the laboratory}{section.3}% 5
+\BOOKMARK [1][-]{section.4}{ROSA basics}{}% 6
+\BOOKMARK [2][-]{subsection.4.1}{Creating a Workspace}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.2}{Creating a ROS package.}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.3}{Creating a node in Python}{section.4}% 9
+\BOOKMARK [1][-]{section.5}{Robots in ROS}{}% 10
+\BOOKMARK [2][-]{subsection.5.1}{Visualizing in Rviz}{section.5}% 11
+\BOOKMARK [1][-]{section.6}{Questions}{}% 12

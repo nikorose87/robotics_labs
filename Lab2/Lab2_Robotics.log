@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.6.15)  29 SEP 2021 17:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.6.15)  29 SEP 2021 17:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -549,10 +549,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 135--137
 
  []
 
-<Figures/logousb.png, id=110, 337.26pt x 132.495pt>
+<Figures/logousb.png, id=114, 337.26pt x 132.495pt>
 File: Figures/logousb.png Graphic file (type png)
 <use Figures/logousb.png>
-Package pdftex.def Info: Figures/logousb.png  used on input line 148.
+Package pdftex.def Info: Figures/logousb.png  used on input line 143.
 (pdftex.def)             Requested size: 94.6051pt x 37.16505pt.
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
@@ -582,12 +582,12 @@ File: Figures/logousb.png Graphic file (type png)
 Package pdftex.def Info: Figures/logousb.png  used on input line 248.
 (pdftex.def)             Requested size: 94.6051pt x 37.16505pt.
  [4]
-<Figures/vel_odom.png, id=148, 548.0475pt x 116.435pt>
+<Figures/vel_odom.png, id=154, 548.0475pt x 116.435pt>
 File: Figures/vel_odom.png Graphic file (type png)
 <use Figures/vel_odom.png>
 Package pdftex.def Info: Figures/vel_odom.png  used on input line 274.
 (pdftex.def)             Requested size: 274.02307pt x 58.21735pt.
-<Figures/render_robot.png, id=152, 298.11375pt x 363.3575pt>
+<Figures/render_robot.png, id=158, 298.11375pt x 363.3575pt>
 File: Figures/render_robot.png Graphic file (type png)
 <use Figures/render_robot.png>
 Package pdftex.def Info: Figures/render_robot.png  used on input line 296.
@@ -597,7 +597,7 @@ File: Figures/logousb.png Graphic file (type png)
 Package pdftex.def Info: Figures/logousb.png  used on input line 298.
 (pdftex.def)             Requested size: 94.6051pt x 37.16505pt.
  [5 <./Figures/vel_odom.png>]
-<Figures/mobile_measurements.png, id=169, 660.4675pt x 539.01375pt>
+<Figures/mobile_measurements.png, id=174, 660.4675pt x 539.01375pt>
 File: Figures/mobile_measurements.png Graphic file (type png)
 <use Figures/mobile_measurements.png>
 Package pdftex.def Info: Figures/mobile_measurements.png  used on input line 31
@@ -670,22 +670,15 @@ LaTeX Info: Redefining \% on input line 24.
 )
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 644.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 644.
-
-
-Package rerunfilecheck Warning: File `Lab2_Robotics.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Lab2_Robotics.out':
-(rerunfilecheck)             Before: D9C23B53027F4B012FD4D408AD23E0F1;1357
-(rerunfilecheck)             After:  5D4C543A9FE60314C3DC8AA959323627;1408.
+Package rerunfilecheck Info: File `Lab2_Robotics.out' has not changed.
+(rerunfilecheck)             Checksum: 5D4C543A9FE60314C3DC8AA959323627;1408.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 644.
  ) 
 Here is how much of TeX's memory you used:
- 13899 strings out of 481239
- 242859 string characters out of 5920377
+ 13900 strings out of 481239
+ 242870 string characters out of 5920377
  825877 words of memory out of 5000000
- 28672 multiletter control sequences out of 15000+600000
+ 28673 multiletter control sequences out of 15000+600000
  537764 words of font info for 44 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,18n,53p,972b,2320s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -704,10 +697,10 @@ are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texmf/fon
 ts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-s
 uper/sftt0800.pfb>
-Output written on Lab2_Robotics.pdf (13 pages, 464626 bytes).
+Output written on Lab2_Robotics.pdf (13 pages, 465195 bytes).
 PDF statistics:
- 560 PDF objects out of 1000 (max. 8388607)
- 516 compressed objects within 6 object streams
+ 565 PDF objects out of 1000 (max. 8388607)
+ 521 compressed objects within 6 object streams
  280 named destinations out of 1000 (max. 500000)
- 189 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 197 words of extra memory for PDF output out of 10000 (max. 10000000)
 

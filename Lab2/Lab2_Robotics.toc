@@ -1,9 +1,9 @@
 \babel@toc {spanish}{}
 \contentsline {section}{\numberline {1}Objectives}{1}{section.1}%
-\contentsline {section}{\numberline {2}Introduction}{1}{section.2}%
+\contentsline {section}{\numberline {2}Introduction}{2}{section.2}%
 \contentsline {section}{\numberline {3}Methods}{2}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Initial conditions}{2}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Units and coordinate system}{2}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.2}Units and coordinate system}{3}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Gazebo and ROS assumptions}{3}{subsection.3.3}%
 \contentsline {section}{\numberline {4}Building the robot base}{4}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Robot base prerequisites}{4}{subsection.4.1}%
@@ -12,4 +12,12 @@
 \contentsline {section}{\numberline {5}Software Parameters}{5}{section.5}%
 \contentsline {subsection}{\numberline {5.1}ROS messages format}{5}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}ROS controllers}{5}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Modeling the robot base}{5}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.3}Modeling the robot base}{6}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Initializing Workspace}{8}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Defining the links}{8}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}Defining the joints}{9}{subsection.5.6}%
+\contentsline {section}{\numberline {6}Simulating the robot base}{10}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Defining Collisions}{10}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Defining actuators}{11}{subsection.6.2}%
+\contentsline {section}{\numberline {7}Defining ROS CONTROLLERS}{12}{section.7}%
+\contentsline {section}{\numberline {8}Additional Work}{13}{section.8}%

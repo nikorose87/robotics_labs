@@ -12,3 +12,11 @@
 \BOOKMARK [2][-]{subsection.5.1}{ROS messages format}{section.5}% 12
 \BOOKMARK [2][-]{subsection.5.2}{ROS controllers}{section.5}% 13
 \BOOKMARK [2][-]{subsection.5.3}{Modeling the robot base}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.4}{Initializing Workspace}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.5}{Defining the links}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.6}{Defining the joints}{section.5}% 17
+\BOOKMARK [1][-]{section.6}{Simulating the robot base}{}% 18
+\BOOKMARK [2][-]{subsection.6.1}{Defining Collisions}{section.6}% 19
+\BOOKMARK [2][-]{subsection.6.2}{Defining actuators}{section.6}% 20
+\BOOKMARK [1][-]{section.7}{Defining ROS CONTROLLERS}{}% 21
+\BOOKMARK [1][-]{section.8}{Additional Work}{}% 22

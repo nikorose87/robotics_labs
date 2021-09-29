@@ -316,16 +316,329 @@ Our robot base model will need the following tags:
 
 The chassis is named \verb|base_link| and you can see the coordinate system in its center. Wheels (or \verb|wheel_frames|) are placed with respect to the \verb|base_link| frame. You can see that, as per our REP, the model follows the right-hand rule in the coordinate system. You can now make out that the forward direction of the robot will always be toward the x axis and that the rotation of the robot is around the z axis. Also, note that the wheels rotate around the y axis with respect to its frame of reference (you shall see this reference in the code in the next section).
 
+\subsection{Initializing Workspace}
+
+All we need to do now is define those meshes as \verb|<link>| and \verb|<joint>| tags for our robot. The mesh files are available in this \href{https://github.com/nikorose87/robotics_labs/tree/main/Lab2/Resources/meshes}{link}. Follow these steps to initialize the workspace:
+
+\begin{enumerate}
+\item Let's create an ROS package and add our files to it. Create a package using the following commands in a new Terminal: 
 \lstinputlisting[language=bash]{create_pkg.sh}
+\item Create folders inside:
+\begin{lstlisting}
+mkdir config launch meshes urdf
+\end{lstlisting}
+\item Copy the meshes that you downloaded from the previous link and paste them into the meshes folder. Now, go to the urdf folder and create a file called \verb|robot_base.urdf.xacro| using the following commands:
+
+\begin{lstlisting}
+cd ~/chapter3_ws/src/robot_description/urdf/
+gedit robot_base.urdf.xacro
+\end{lstlisting}
+\item Initialize the XML version tag and \verb|<robot>| tag, as shown here, and begin copying the given XML code into it step by step:
+\begin{lstlisting}
+<?xml version="1.0"?>
+<<robot xmlns:xacro="http://ros.org/wiki/xacro" name="robot_base">
+    
+</robot>
+\end{lstlisting}
+
+\end{enumerate}
+
+\subsection{Defining the links}
+
+Since you're defining the robot model by parts, copy all of the following code here into the \verb|<robot>| tags (that is, the space between the \verb|<robot>| tags). The chassis link is as follows:
+
+\lstinputlisting[language=xml]{base_link.xml}
+
+The link defines the robot geometrically and helps in visualization. The preceding is the robot chassis, which we will call \verb|base_link|.
+
+Four wheels need to connect to \verb|base_link|. We could reuse the same model with different names and necessary coordinate information with the help of xacro. So, let's create another file called \verb|robot_essentials.xacro| and define standard macros so that we can reuse them:
+
+\begin{lstlisting}[language=xml]
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="robot_essentials" >
+
+<xacro:macro name="robot_wheel" params="prefix">
+
+<link name="${prefix}_wheel">
+    <inertial>
+      <origin
+        xyz="-4.1867E-18 0.0068085 -1.65658661799998E-18"
+        rpy="0 0 0" />
+      <mass
+        value="2.6578" />
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="1.5707963267949 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/meshes/wheel.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+  </link>
+
+</xacro:macro>
+</robot>
+\end{lstlisting}
+
+We have created a common macro for a wheel in this file. So, all you need to do now is call this macro in your actual robot file, \verb|robot_base.urdf.xacro|, as shown here:
+
+\begin{lstlisting}[language=xml]
+<xacro:robot_wheel prefix="front_left"/>
+<xacro:robot_wheel prefix="front_right"/>
+<xacro:robot_wheel prefix="rear_left"/>
+<xacro:robot_wheel prefix="rear_right"/>
+\end{lstlisting}
+
+That's it. Can you see how quickly you have converted that many lines of code (for a link) into just one line of code for each link? Now, let's learn how to define joints.
+
+\subsection{Defining the joints}
+
+As shown in the preceding representation diagram, the connections are only between the wheels and the chassis. The wheels are connected to \verb|base_link| and they rotate around their y axis on their own frame of reference. Due to this, we can make use of continuous joint types. Since they're the same for all wheels, let's define them as xacro in the \verb|robot_essentials.xacro| file:
+
+\begin{lstlisting}[language=xml]
+<xacro:macro name="wheel_joint" params="prefix origin">
+
+<joint name="${prefix}_wheel_joint" type="continuous">
+    <axis xyz="0 1 0"/>
+    <parent link ="base_link"/>
+    <child link ="${prefix}_wheel"/>
+    <origin rpy ="0 0 0" xyz= "${origin}"/>
+  </joint>
+
+</xacro:macro>
+\end{lstlisting}
+
+As you can see, only the origin and the name needs to change in the preceding block of code. Hence, in our \verb|robot_base.urdf.xacro| file, we'll define the wheel joints as follows:
+
+\begin{lstlisting}[language=xml]
+<xacro:wheel_joint prefix="front_left" origin="0.220 0.250 0"/>
+<xacro:wheel_joint prefix="front_right" origin="0.220 -0.250 0"/>
+<xacro:wheel_joint prefix="rear_left" origin="-0.220 0.250 0"/>
+<xacro:wheel_joint prefix="rear_right" origin="-0.220 -0.250 0"/>
+\end{lstlisting}
+
+Now that you have everything in your file, let's visualize this in rviz and see whether it matches our representation. You can do that by using the following commands in a new Terminal:
+
+\begin{lstlisting}[language=bash]
+source /opt/ros/noetic/setup.bash
+cd ~/chapter3_ws/ 
+source devel/setup.bash 
+roscd robot_description/urdf/
+roslaunch urdf_tutorial display.launch model:=robot_base.urdf.xacro
+\end{lstlisting}
+
+Add the robot model and, in the \textbf{Global} options, set \textbf{Fixed Frame} to \verb|base_link|. Now, you should see our robot model if everything was successful. You can add the tf display and see whether the representation matches the \textit{Representing the robot 2D with link/coordinate system information diagram}. You can also move the wheels using the sliders that were launched as a result of setting the \verb|gui| argument to \verb|true|.
+
+\section{Simulating the robot base}
+
+The first four steps were initially used to define the robot URDF model so that it could be understood by ROS. Now that we have a proper robot model that is understood by ROS, we need to add a few more tags to view the model in Gazebo.
+
+\subsection{Defining Collisions}
+
+To visualize the robot in Gazebo, we need to add the <collision> tags, along with the <visual> tags defined in the <link> tag. For the base, add them to the \verb|robot_base.urdf.xacro| file since we defined \verb|base_link| there.
+
+\begin{lstlisting}[language=xml]
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="1.5707963267949 0 3.14" />
+      <geometry>
+        <mesh filename="package://robot_description/meshes/robot_base.stl" />
+      </geometry>
+    </collision>
+\end{lstlisting}
+
+For all the wheel links, add them to the \verb1robot_essentials.xacro1 file since we defined the wheel link there:
+
+\begin{lstlisting}[language=xml]
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="1.5707963267949 0 0" />
+      <geometry>
+        <mesh filename="package://robot_description/meshes/wheel.stl" />
+      </geometry>
+    </collision>
+\end{lstlisting}
+
+Since Gazebo is a physics simulator, we define the physical properties using the \verb|<inertial>| tags. We can acquire the mass and inertial properties from this third-party software. The inertial properties that are acquired from this software are added inside the \verb|<link>| tag, along with suitable tags, as indicated:
+
+\begin{enumerate}
+\item For the base:
+
+\begin{lstlisting}[language=xml]
+    <inertial>
+      <origin
+        xyz="0.0030946 4.78250032638821E-11 0.053305"
+        rpy="0 0 0" />
+      <mass
+        value="47.873" />
+      <inertia
+        ixx="0.774276574699151"
+        ixy="-1.03781944357671E-10"
+        ixz="0.00763014265820928"
+        iyy="1.64933255189991"
+        iyz="1.09578155845563E-12"
+        izz="2.1239326987473" />
+    </inertial>
+\end{lstlisting}
+
+\item For the wheels:
+
+\begin{lstlisting}[language=xml]
+    <inertial>
+      <origin
+        xyz="-4.1867E-18 0.0068085 -1.65658661799998E-18"
+        rpy="0 0 0" />
+      <mass
+        value="2.6578" />
+      <inertia
+        ixx="0.00856502765719703"
+        ixy="1.5074118157338E-19"
+        ixz="-4.78150098725052E-19"
+        iyy="0.013670640432096"
+        iyz="-2.68136447099727E-19"
+        izz="0.00856502765719703" />
+    </inertial>
+\end{lstlisting}
+
+\end{enumerate}
+
+Now that the Gazebo properties have been created, let's create the mechanisms.
+
+\subsection{Defining actuators}
+
+Now, we need to define the actuator information for our robot wheels in the \verb|robot_base_essentials.xacro| file:
+
+\begin{lstlisting}[language=xml]
+<xacro:macro name="base_transmission" params="prefix ">
+
+<transmission name="${prefix}_wheel_trans" type="SimpleTransmission">
+  <type>transmission_interface/SimpleTransmission</type>
+  <actuator name="${prefix}_wheel_motor">
+   <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+   <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+  <joint name="${prefix}_wheel_joint">
+   <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+  </joint>
+</transmission>
+
+</xacro:macro>
+\end{lstlisting}
+
+Let's call them in our robot file as macros:
+
+\begin{lstlisting}[language=xml]
+<xacro:base_transmission prefix="front_left"/>
+<xacro:base_transmission prefix="front_right"/>
+<xacro:base_transmission prefix="rear_left"/>
+<xacro:base_transmission prefix="rear_right"/>
+\end{lstlisting}
+
+You can find the \verb|robot_base_essentials.xacro| file in this GitHub \href{https://github.com/nikorose87/robotics_labs/tree/main/Lab2/Resources/urdf}{repository}.
+
+Now that the mechanisms have been called, let's call the controllers that use them and make our robot dynamic.
+
+\section{Defining ROS CONTROLLERS}
+
+Finally, we need to port the plugins that are needed to establish communication between Gazebo and ROS. For these, we need to create another file called \verb|gazebo_essentials_base.xacro| that will contain the \verb|<Gazebo>| tags as follows:
+
+\begin{lstlisting}[language=xml]
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="gazebo_essentials" >
 
 
-%  \begin{bmatrix}
-%   
-%  
-%   \end{bmatrix}
-%\begin{lstlisting}
-%cd ~
-%mkdir -p lab_ws/src
-%\end{lstlisting}
+<gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+      <controlPeriod>0.001</controlPeriod>
+      <legacyModeNS>false</legacyModeNS>
+    </plugin>
+  </gazebo>
+<!--################################ ROS-Controllers ######################################-->
+<gazebo>
+      <plugin name="diff_drive_controller" filename="libgazebo_ros_diff_drive.so">
+        <legacyMode>false</legacyMode>
+        <alwaysOn>true</alwaysOn>
+        <updateRate>1000.0</updateRate>
+        <leftJoint>front_left_wheel_joint, rear_left_wheel_joint</leftJoint>
+        <rightJoint>front_right_wheel_joint, rear_right_wheel_joint</rightJoint>
+        <wheelSeparation>0.5</wheelSeparation>
+        <wheelDiameter>0.2</wheelDiameter>
+        <wheelTorque>10</wheelTorque>
+        <publishTf>1</publishTf>
+        <odometryFrame>map</odometryFrame>
+        <commandTopic>cmd_vel</commandTopic>
+        <odometryTopic>odom</odometryTopic>
+        <robotBaseFrame>base_link</robotBaseFrame>
+        <wheelAcceleration>2.8</wheelAcceleration>
+        <publishWheelJointState>true</publishWheelJointState>
+        <publishWheelTF>false</publishWheelTF>
+        <odometrySource>world</odometrySource>
+        <rosDebugLevel>Debug</rosDebugLevel>
+      </plugin>
+</gazebo>
 
+<xacro:macro name="wheel_friction" params="prefix ">
+
+<gazebo reference="${prefix}_wheel">
+ <mu1 value="1.0"/>
+ <mu2 value="1.0"/>
+ <kp value="10000000.0" />
+ <kd value="1.0" />
+ <fdir1 value="1 0 0"/>
+</gazebo>
+
+</xacro:macro>
+
+</robot>
+\end{lstlisting}
+
+The call macro in the robot file is as follows:
+
+\begin{lstlisting}[language=xml]
+
+<xacro:wheel_friction prefix="front_left"/>
+<xacro:wheel_friction prefix="front_right"/>
+<xacro:wheel_friction prefix="rear_left"/>
+<xacro:wheel_friction prefix="rear_right"/>
+
+\end{lstlisting}
+
+Now that we have defined the macros for our robot, along with the Gazebo plugins, let's add them to our robot file. This can be easily done by just adding the following two lines in the robot file inside the \verb|<robot>| macro tag:
+
+\begin{lstlisting}[language=xml]
+<xacro:include filename="$(find robot_description)/urdf/robot_base_essentials.xacro" />
+<xacro:include filename="$(find robot_description)/urdf/gazebo_essentials_base.xacro" />
+\end{lstlisting}
+
+Now that the URDFs are complete, let's configure the controllers. Let's create the following config file to define the controllers we are using. For this, let's go to our workspace, go inside the config folder we created, and create a controller config file, as shown here:
+
+\begin{lstlisting}[language=bash]
+
+cd ~/chapter3_ws/src/robot_description/config/
+gedit control.yaml
+
+\end{lstlisting}
+
+Now, copy the code that's available in this GitHub \href{https://github.com/nikorose87/robotics_labs/blob/main/Lab2/Resources/config/control.yaml}{repository}, into the file. Now that we have completed our \verb|robot_base| model, let's test it in Gazebo.
+
+This laboratory is under construction, please continue with the guides from the book \citep{Gandhinathan2020}, I attached to this link
+
+
+\section{Additional Work}
+
+Replace the manipulator from this guide and add the manipulator you have already configured with the MoveIt assistant. Present the report with this manipulator, the movement is a bonus. Work in groups as always.
+
+This project was taken from \cite{Gandhinathan2020}
+\bibliographystyle{plain}
+\bibliography{biblio.bib}
 \end{document}

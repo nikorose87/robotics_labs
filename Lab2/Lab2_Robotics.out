@@ -1,0 +1,14 @@
+\BOOKMARK [1][-]{section.1}{Objectives}{}% 1
+\BOOKMARK [1][-]{section.2}{Introduction}{}% 2
+\BOOKMARK [1][-]{section.3}{Methods}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Initial conditions}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Units and coordinate system}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Gazebo and ROS assumptions}{section.3}% 6
+\BOOKMARK [1][-]{section.4}{Building the robot base}{}% 7
+\BOOKMARK [2][-]{subsection.4.1}{Robot base prerequisites}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.2}{Robot base specifications}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.3}{Robot base kinematics}{section.4}% 10
+\BOOKMARK [1][-]{section.5}{Software Parameters}{}% 11
+\BOOKMARK [2][-]{subsection.5.1}{ROS messages format}{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.2}{ROS controllers}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.3}{Modeling the robot base}{section.5}% 14

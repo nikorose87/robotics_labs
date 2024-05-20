@@ -60,6 +60,7 @@ This project involves designing, simulating, and constructing a 4-DoF (Degrees-o
 * Document your progress throughout the project. 
 * Regularly test your simulation and address any issues that arise.
 * Consider safety precautions when 3D printing and assembling the robot.
+* The robot is fixed, so make sure you attach the base properly to the ground.
 * The work is by the same groups along the semester.
 
 
